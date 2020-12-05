@@ -45,28 +45,116 @@
             background-size: 100% 100%;
             margin: 0 auto;
         }
+
+        .icon_img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .box {
+            width: 50px !important;
+            height: 50px !important;
+            border: 1px solid black;
+            background-size: 100% 100% !important;
+        }
+
+        .clean {
+            padding: 0 0 0 0;
+        }
+
+        .box_end {
+            display: none;
+        }
+
+        #icon_imgs .box {
+            margin-left: 30px;
+        }
+
+        #a3 .box,
+        #a2 .box {
+            margin-left: 10px;
+        }
+
+        .drag {
+            border: 2px solid blue;
+        }
     </style>
 </head>
 
 <body>
     <div id="J_wrapper">
-        <div id="top" style="width: 100%;height: 75%;">
+        <div style="width: 95%;
+        height: 20%;
+        font-size: 0.5rem;
+        text-align: left;
+        margin: 0 auto;
+        line-height: 200%;">1、把正确的节奏放在天平的一端</div>
+
+        <div id="top" style="width: 100%;height: 55%;">
             <div class="container" style="height: 100%;">
                 <div class="row" style="height: 100%;display: flex; align-items: center;">
                     <div class="col">
                         <div class="balance_1">
+                            <div class="row" style="position: relative;top: 37px;" id="a3">
+                                <div class="box box_start" style="background: url(./image/1.png);"></div>
+                                <div class="box box_start" style="background: url(./image/2.png);"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="balance_2">
+                            <div class="row" style="position: relative;top: 37px;" id="a2">
+                                <div class="box box_start" style="background: url(./image/3.png);"></div>
+                                <div class="box box_start" style="background: url(./image/2.png);"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div id="bottom" style="width: 100%;height: 25%;">
-            <span>2</span>
+            <div style="width: 50%;height: 100%;margin: 0 auto;">
+                <div class="row" id="icon_imgs">
+                    <div class="box" style="background: url(./image/1.png);"></div>
+                    <div class="box" style="background: url(./image/2.png);"></div>
+                    <div class="box" style="background: url(./image/3.png);"></div>
+                    <div class="box" style="background: url(./image/1.png);"></div>
+                </div>
+            </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script>
+        new Sortable(document.getElementById("icon_imgs"), {
+            group: 'shared',
+            sort: false,
+            animation: 1000,
+            dragClass: 'drag', // 拖动对象移动样式
+            forceFallback: true,// 禁用html5原生拖拽行为
+            onMove: function (evt, originalEvent) {
+                console.log("start");
+            },
+            onEnd: function (evt) {
+                console.log("end");
+            },
+        });
+
+        new Sortable(document.getElementById("a2"), {
+            group: 'shared',
+            animation: 1000,
+            sort: false,
+            filter: ".box_start",
+            dragClass: 'drag', // 拖动对象移动样式
+            forceFallback: true,// 禁用html5原生拖拽行为
+        });
+
+        new Sortable(document.getElementById("a3"), {
+            group: 'shared',
+            animation: 1000,
+            sort: false,
+            filter: ".box_start",
+        });
+    </script>
 </body>
+
 </html>
